@@ -55,9 +55,9 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'production',
+			'database'  => 'cms',
 			'username'  => 'root',
-			'password'  => '',
+			'password'  => 'Apptitude',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
