@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-    <style>
-        .error{
-            color: red;
-        }
-    </style>
-</head>
-<body>
+@extends('admin/layout')
+
+@section('title')
+    New Section
+@stop
+
+@section('content')
     <h1>New Section</h1>
 
     {{ Form::open(['url'=>'admin/sections','method'=>'POST']) }}
@@ -60,5 +55,4 @@
             {{ Form::submit('Create section') }}
         </p>
     {{ Form::close() }}
-</body>
-</html>
+@stop
