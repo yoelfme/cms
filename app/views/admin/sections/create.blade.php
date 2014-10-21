@@ -9,23 +9,23 @@
 
     {{ Form::open(['url'=>'admin/sections','method'=>'POST']) }}
         <p>
-            {{ Form::label('name','Name') }}
+            {{ Form::label('name','Name',array('class'=>'col-sm-2')) }}
             {{ Form::text('name') }}
             {{ $errors->first('name','<p class="error">:message</p>') }}
         </p>
         <p>
-            {{ Form::label('slug_url','Slug URL') }}
+            {{ Form::label('slug_url','Slug URL',array('class'=>'col-sm-2')) }}
             {{ Form::text('slug_url') }}
             {{ $errors->first('slug_url','<p class="error">:message</p>') }}
         </p>
         <p>
-            {{ Form::label('type','Type') }}
+            {{ Form::label('type','Type',array('class'=>'col-sm-2')) }}
             {{ Form::select('type',[''=>'Select','page'=>'Page','blog'=>'Blog']) }}
 
             {{ $errors->first('type','<p class="error">:message</p>') }}
         </p>
         <p>
-            <label for="">
+            <label for="" class="col-sm-2">
                 {{ Form::radio('menu',1) }}
                 Show in menu
             </label>
@@ -36,12 +36,12 @@
             {{ $errors->first('menu','<p class="error">:message</p>') }}
         </p>
         <p>
-            {{ Form::label('menu_order','Menu Order') }}
+            {{ Form::label('menu_order','Menu Order',array('class'=>'col-sm-2')) }}
             {{ Form::text('menu_order') }}
             {{ $errors->first('menu_order','<p class="error">:message</p>') }}
         </p>
         <p>
-            <label for="">
+            <label for="" class="col-sm-2">
                 {{ Form::radio('published',1) }}
                 Published
             </label>
@@ -52,7 +52,7 @@
             {{ $errors->first('published','<p class="error">:message</p>') }}
         </p>
         <p>
-            {{ Form::submit('Create section') }}
+            {{ Form::submit('Create section',array('class'=>'btn btn-success')) }}
         </p>
     {{ Form::close() }}
 @stop
