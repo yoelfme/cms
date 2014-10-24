@@ -12,8 +12,8 @@ modules:
     config:
         Db:
             dsn: 'mysql:host=localhost;dbname=cms_test'
-            user: 'root'
-            password: 'Apptitude'
+            user: 'homestead'
+            password: 'secret'
             dump: 'tests/_data/dump.sql'
             populate: true
             cleanup: false

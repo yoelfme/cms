@@ -61,7 +61,7 @@ class AdminSectionsController extends \BaseController {
 	 */
 	public function show($id)
 	{
-        $section =Section::find($id);
+        $section =Section::findOrFail ($id);
 
         return View::make('admin/sections/show')->with('section',$section);
 	}
