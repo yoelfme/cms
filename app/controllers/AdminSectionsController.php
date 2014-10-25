@@ -75,7 +75,9 @@ class AdminSectionsController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		$section = Section::findOrFail($id);
+
+        return View::make('admin/sections/edit')->with('section',$section);
 	}
 
 
@@ -87,7 +89,27 @@ class AdminSectionsController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+        $section = Section::findOrFail($id);
+
+        $data = Input::all();
+        $rules = array(
+            'name'=>'required',
+            'slug_url'=>'required',
+            'type'  => 'required|in:page,blog',
+            'menu' => 'in:1,0',
+            'published' =>'in:1,0',
+            'menu_order' => 'integer'
+        );
+
+        $validator = Validator::make($data,$rules);
+
+        if ($validator->passes()){
+            $section->fill($data);
+            $section->save();
+            return Redirect::route('admin.sections.show', $section->id);
+        }else{
+            return Redirect::back()->withInput()->withErrors($validator->messages());
+        }
 	}
 
 

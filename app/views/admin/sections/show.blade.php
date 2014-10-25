@@ -6,12 +6,16 @@
 </head>
 <body>
     <h1>{{ $section->name }}</h1>
-
+    <p>
+        <a href="{{ route('admin.sections.edit', $section->id) }}" class="btn-edit">
+            Edit section
+        </a>
+    </p>
     <table>
         <tr>
             <th>Slug URL:</th>
             <td class="slug-url">{{ $section->slug_url }}</td>
-            <th>Menu orderL:</th>
+            <th>Menu order:</th>
             <td class="menu-order">{{ $section->menu_order }}</td>
         </tr>
         <tr>
