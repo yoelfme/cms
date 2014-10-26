@@ -1,20 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head lang="es">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+@extends('admin/layout')
+
+@section('content')
     <h1>{{ $section->name }}</h1>
     <p>
-        <a href="{{ route('admin.sections.edit', $section->id) }}" class="btn-edit">
+        <a href="{{ route('admin.sections.edit', $section->id) }}" class="btn-edit btn btn-primary">
             Edit section
         </a>
         {{ Form::open(['route'=> ['admin.sections.destroy',$section->id],'method'=>'DELETE']) }}
-            {{ Form::button('Delete section',['type'=>'submit','class'=>'btn-del']) }}
+            {{ Form::button('Delete section',['type'=>'submit','class'=>'btn-del btn btn-danger']) }}
         {{ Form::close() }}
     </p>
-    <table>
+    <table class="table">
         <tr>
             <th>Slug URL:</th>
             <td class="slug-url">{{ $section->slug_url }}</td>
@@ -28,5 +24,4 @@
             <td class="published">{{ $section->published ? 'Published' : 'Draft' }}</td>
         </tr>
     </table>
-</body>
-</html>
+@stop
