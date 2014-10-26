@@ -4,14 +4,7 @@ $I->am('a CMS admin');
 $I->wantTo('update a section');
 
 // When
-$id = $I->haveRecord('sections',[
-    'name' => 'Our Company',
-    'slug_url' => 'our-company',
-    'menu_order' => 2,
-    'menu' => 1,
-    'type'=>'page',
-    'published' => 0
-]);
+$id = $I->haveSection();
 
 // And
 $I->amOnPage('admin/sections/' . $id);

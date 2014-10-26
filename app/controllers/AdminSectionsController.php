@@ -2,6 +2,15 @@
 
 class AdminSectionsController extends \BaseController {
 
+    protected $rules = array(
+        'name'=>'required',
+        'slug_url'=>'required',
+        'type'  => 'required|in:page,blog',
+        'menu' => 'in:1,0',
+        'published' =>'in:1,0',
+        'menu_order' => 'integer'
+    );
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -32,16 +41,8 @@ class AdminSectionsController extends \BaseController {
 	public function store()
 	{
         $data = Input::all();
-        $rules = array(
-            'name'=>'required',
-            'slug_url'=>'required',
-            'type'  => 'required|in:page,blog',
-            'menu' => 'in:1,0',
-            'published' =>'in:1,0',
-            'menu_order' => 'integer'
-        );
 
-        $validator = Validator::make($data,$rules);
+        $validator = Validator::make($data,$this->rules);
 
         if ($validator->passes()){
             $section = Section::create($data);
@@ -92,16 +93,8 @@ class AdminSectionsController extends \BaseController {
         $section = Section::findOrFail($id);
 
         $data = Input::all();
-        $rules = array(
-            'name'=>'required',
-            'slug_url'=>'required',
-            'type'  => 'required|in:page,blog',
-            'menu' => 'in:1,0',
-            'published' =>'in:1,0',
-            'menu_order' => 'integer'
-        );
 
-        $validator = Validator::make($data,$rules);
+        $validator = Validator::make($data,$this->rules);
 
         if ($validator->passes()){
             $section->fill($data);
@@ -121,7 +114,10 @@ class AdminSectionsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$section = Section::findOrFail($id);
+        $section->delete();
+
+        return Redirect::route('admin.sections.index');
 	}
 
 
