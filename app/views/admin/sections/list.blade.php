@@ -10,6 +10,8 @@
 
 <p>There are {{ $sections->count() }} sections</p>
 
+@include('admin/sections/partials/filters')
+
 <table class="table table-bordered">
     <thead>
         <th>Name</th>
