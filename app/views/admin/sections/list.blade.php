@@ -16,6 +16,8 @@
     <thead>
         <th>Name</th>
         <th>Slug URL</th>
+        <th>Published</th>
+        <th>Menu</th>
         <th>Actions</th>
     </thead>
     <tbody>
@@ -23,9 +25,11 @@
         <tr>
             <td class="name">{{ $section->name }}</td>
             <td>{{ $section->slug_url }}</td>
+            <td>{{ $section->menu ? 'Show in menu' : "Don't show in menu" }}</td>
+            <td>{{ $section->published ? 'Published' : 'Draft' }}</td>
             <td>
-                <a href="{{ route('admin.sections.show',$section->id) }}">Show</a>
-                <a href="{{ route('admin.sections.edit',$section->id) }}">Edit</a>
+                <a class="btn btn-primary" href="{{ route('admin.sections.show',$section->id) }}">Show</a>
+                <a class="btn btn-primary" href="{{ route('admin.sections.edit',$section->id) }}">Edit</a>
             </td>
         </tr>
         @endforeach

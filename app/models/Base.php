@@ -1,17 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: yoel
- * Date: 17/10/14
- * Time: 22:05
- */
 
-class Section extends Eloquent{
+class Base extends Eloquent{
 
-    protected $fillable = ['name','slug_url','type','menu','menu_order','published'];
+    public static $filters = [];
 
     public static function search(array $data = array())
     {
+        $data = array_only($data,static::$filters);
         $data = array_filter($data,'strlen');
 
         $q = Section::select();
@@ -34,11 +29,6 @@ class Section extends Eloquent{
         }
 
         return $q->get();
-    }
-
-    public static function filterBySearch($q, $value)
-    {
-        $q->where('name',$value);   // Input::get('search');
     }
 
 }
