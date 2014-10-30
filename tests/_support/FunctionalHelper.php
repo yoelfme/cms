@@ -13,24 +13,7 @@ class FunctionalHelper extends \Codeception\Module
 {
     public function haveSections($num = 10)
     {
-        $faker = Faker::create();
-        $sections = new Collection();
-
-        for ($i=0; $i<$num; $i++)
-        {
-            $name = $faker->unique()->sentence(2);
-
-            $sections->add(Section::create([
-                'name' => $name,
-                'slug_url' => \Str::slug($name),
-                'type' =>$faker->randomElement(['page','blog']),
-                'menu_order' => rand(1,10),
-                'menu' => rand(0,1),
-                'published' => rand(0,1)
-            ]));
-        }
-
-        return $sections;
+       return (new \SectionsSeeder())->haveSections($num);
     }
 
     public function haveSection()

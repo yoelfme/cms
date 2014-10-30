@@ -17,7 +17,7 @@ $I->click('Edit section');
 // Then
 $I->seeCurrentUrlEquals('/admin/sections/' . $id . '/edit');
 $I->see('Edit section "Our Company"','h1');
-$I->seeInField('name','Our Company');
+$I->seeInField('name','Our company');
 $I->seeInField('slug_url','our-company');
 $I->seeInField('menu_order',2);
 $I->seeOptionIsSelected('published',0);

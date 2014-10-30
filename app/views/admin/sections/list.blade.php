@@ -8,32 +8,41 @@
     </a>
 </p>
 
-<p>There are {{ $sections->count() }} sections</p>
+ @include('admin/sections/partials/filters')
 
-@include('admin/sections/partials/filters')
+@if ($sections->getTotal())
+    <p>There are {{ $sections->getTotal() }} sections, showing page {{ $sections->getCurrentPage() }} of {{ $sections->getLastPage() }}</p>
 
-<table class="table table-bordered">
-    <thead>
-        <th>Name</th>
-        <th>Slug URL</th>
-        <th>Published</th>
-        <th>Menu</th>
-        <th>Actions</th>
-    </thead>
-    <tbody>
-        @foreach($sections as $section)
-        <tr>
-            <td class="name">{{ $section->name }}</td>
-            <td>{{ $section->slug_url }}</td>
-            <td>{{ $section->menu ? 'Show in menu' : "Don't show in menu" }}</td>
-            <td>{{ $section->published ? 'Published' : 'Draft' }}</td>
-            <td>
-                <a class="btn btn-primary" href="{{ route('admin.sections.show',$section->id) }}">Show</a>
-                <a class="btn btn-primary" href="{{ route('admin.sections.edit',$section->id) }}">Edit</a>
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
+
+
+    <table class="table table-bordered">
+        <thead>
+            <th>Name</th>
+            <th>Slug URL</th>
+            <th>Menu</th>
+            <th>Published</th>
+            <th>Actions</th>
+        </thead>
+        <tbody>
+            @foreach($sections as $section)
+            <tr>
+                <td class="name">{{ $section->name }}</td>
+                <td>{{ $section->slug_url }}</td>
+                <td>{{ $section->menu ? 'Show in menu' : "Don't show in menu" }}</td>
+                <td>{{ $section->published ? 'Published' : 'Draft' }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ route('admin.sections.show',$section->id) }}">Show</a>
+                    <a class="btn btn-primary" href="{{ route('admin.sections.edit',$section->id) }}">Edit</a>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+
+    {{ $sections->links() }}
+@else
+    <h4>There are no sections, please create the first one</h4>
+@endif
+
 
 @stop
