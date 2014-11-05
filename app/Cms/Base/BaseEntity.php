@@ -1,6 +1,8 @@
 <?php namespace Cms\Base;
 
-class BaseEntity extends Eloquent{
+use Illuminate\Database\Eloquent\Model;
+
+class BaseEntity extends Model{
 
 
 
