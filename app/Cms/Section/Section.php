@@ -1,4 +1,4 @@
-<?php
+<?php namespace Cms\Section;
 /**
  * Created by PhpStorm.
  * User: yoel
