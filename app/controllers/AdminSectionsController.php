@@ -1,6 +1,6 @@
 <?php
 
-use Cms\Section\SectionRepo;
+use Cms\Section\SectionRepoInterface;
 
 class AdminSectionsController extends \BaseController {
 
@@ -16,7 +16,7 @@ class AdminSectionsController extends \BaseController {
 
     protected $sectionRepo;
 
-    public function __construct(SectionRepo $sectionRepo)
+    public function __construct(SectionRepoInterface $sectionRepo)
     {
         $this->sectionRepo = $sectionRepo;
     }

@@ -2,7 +2,8 @@
 
 use Cms\Base\BaseRepo;
 
-class SectionRepo extends BaseRepo{
+class SectionRepo extends BaseRepo implements SectionRepoInterface
+{
 
     public function getModel()
     {
