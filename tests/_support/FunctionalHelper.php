@@ -13,12 +13,12 @@ class FunctionalHelper extends \Codeception\Module
 {
     public function haveSections($num = 10)
     {
-       return (new \SectionsSeeder())->haveSections($num);
+       return \App::make('SectionsSeeder')->haveSections($num);
     }
 
     public function haveSection()
     {
-        return $this->getModule('Laravel4')->haveRecord('sections',[
+        $section = \App::make('Cms\Section\SectionRepoInterface')->create([
             'name' => 'Our company',
             'slug_url' => 'our-company',
             'type' =>'page',
@@ -26,5 +26,7 @@ class FunctionalHelper extends \Codeception\Module
             'menu' => 1,
             'published' => 0
         ]);
+
+        return $section->id;
     }
 }

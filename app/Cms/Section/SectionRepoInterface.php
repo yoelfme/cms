@@ -17,7 +17,7 @@ interface SectionRepoInterface
 
     public function create(array $data);
 
-    public function update(BaseEntity $entity, array $data);
+    public function update($entity, array $data);
 
     public function delete($entity);
 }

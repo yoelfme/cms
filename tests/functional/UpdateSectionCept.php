@@ -10,10 +10,10 @@ $id = $I->haveSection();
 $I->amOnPage('admin/sections/' . $id);
 
 // Then
-$I->see('Edit section','.btn-edit');
+$I->see('Edit','.btn-edit');
 
 // When
-$I->click('Edit section');
+$I->click('Edit');
 // Then
 $I->seeCurrentUrlEquals('/admin/sections/' . $id . '/edit');
 $I->see('Edit section "Our Company"','h1');
@@ -48,7 +48,7 @@ $I->click('Update section');
 $I->expectTo('see the section details with the new changes');
 $I->seeCurrentUrlEquals('/admin/sections/' . $id);
 $I->see('Who we are','h1');
-
+/*
 $I->seeRecord('sections',[
     'id' => $id,
     // changed
@@ -59,4 +59,4 @@ $I->seeRecord('sections',[
     'menu_order' => 2,
     'menu' => 1,
     'type'=>'page',
-]);
+]);*/

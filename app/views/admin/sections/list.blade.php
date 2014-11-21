@@ -25,14 +25,15 @@
         </thead>
         <tbody>
             @foreach($sections as $section)
+            <?php dd($section); ?>
             <tr>
                 <td class="name">{{ $section->name }}</td>
                 <td>{{ $section->slug_url }}</td>
                 <td>{{ $section->menu ? 'Show in menu' : "Don't show in menu" }}</td>
                 <td>{{ $section->published ? 'Published' : 'Draft' }}</td>
                 <td>
-                    <a class="btn btn-primary" href="{{ route('admin.sections.show',$section->id) }}">Show</a>
-                    <a class="btn btn-primary" href="{{ route('admin.sections.edit',$section->id) }}">Edit</a>
+                    <a class="btn btn-primary" href="{{ route('admin.sections.show',$section->asfd) }}">Show</a>
+                    <a class="btn-edit btn btn-primary" href="{{ route('admin.sections.edit',$section->id) }}">Edit</a>
                 </td>
             </tr>
             @endforeach
