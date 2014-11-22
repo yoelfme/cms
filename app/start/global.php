@@ -80,12 +80,11 @@ App::down(function()
 
 require app_path().'/filters.php';
 
-if (App::environment()=='testing')
+if (App::environment() == 'testing')
 {
-    App::bind('Cms\Section\SectionRepoInterface','Cms\Stubs\Section\ArraySectionRepo');
+    App::bind('Cms\Section\SectionRepoInterface', 'Cms\Stubs\Section\ArraySectionRepo');
 }
 else
 {
-    App::bind('Cms\Section\SectionRepoInterface','Cms\Section\SectionRepo');
+    App::bind('Cms\Section\SectionRepoInterface', 'Cms\Section\SectionRepo');
 }
-

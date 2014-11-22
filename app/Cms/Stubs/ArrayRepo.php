@@ -2,27 +2,32 @@
 
 use Cms\Stubs\PaginableCollection as Collection;
 
-abstract class ArrayRepo{
+abstract class ArrayRepo {
 
-    const PAGINATE =true;
+    const PAGINATE = true;
+
     public $filters = [];
 
     protected static $collection = [];
 
+    public static function cleanRepos()
+    {
+        static::$collection = [];
+    }
+
     protected static function collection()
     {
         $class = get_called_class();
-        if( ! isset(static::$collection[$class]))
+        if ( ! isset (static::$collection[$class]))
         {
             static::$collection[$class] = new Collection();
         }
-
         return static::$collection[$class];
     }
 
     public function findOrFail($id)
     {
-        if (! static::collection()->has($id))
+        if ( ! static::collection()->has($id))
         {
             \App::abort(404);
         }
@@ -30,43 +35,49 @@ abstract class ArrayRepo{
         return static::collection()->get($id);
     }
 
-    public function search(array $data = array(),$paginate = false)
+    public function search(array $data = array(), $paginate = false)
     {
-        $data = array_only($data,$this->filters);
-        $data = array_filter($data,'strlen');
+        $data = array_only($data, $this->filters);
+        $data = array_filter($data, 'strlen');
 
         $collection = clone static::collection();
 
-        foreach($data as $field => $value) {
-            if (isset($data[$field])) {
-                $filterMethod = 'filterBy' . studly_case($field);
+        foreach ($data as $field => $value)
+        {
+            // slug_url -> filterBySlugUrl
+            $filterMethod = 'filterBy' . studly_case($field);
 
-                if (method_exists(get_called_class(), $filterMethod)) {
-                    $this->$filterMethod($collection, $value);
-                } else {
-                    $collection = $collection->filter(function ($item) use ($field,$value){
-                        return $item->$field == $value;
-                    });
-                }
+            if (method_exists(get_called_class(), $filterMethod))
+            {
+                $collection = $this->$filterMethod($collection, $value);
+            }
+            else
+            {
+                $collection = $collection->filter(function ($item) use ($field, $value) {
+                   return $item->$field == $value;
+                });
             }
         }
 
-        return $paginate ? $collection->paginate() : $collection;
+        return $paginate ?
+            $collection->paginate(15, $data)
+            : $collection;
     }
 
     abstract public function getStubModel();
 
     public function create(array $data)
     {
-        $data['id'] = static::collection()->count() +  1;
+        $data['id'] = static::collection()->count() + 1;
+
         $entity = $this->getStubModel();
         $entity->setData($data);
 
-        static::collection()->put($data['id'],$entity);
+        static::collection()->put($data['id'], $entity);
         return $entity;
     }
 
-    public function update($entity,array $data)
+    public function update($entity, array $data)
     {
         $entity->setData($data);
         return $entity;
@@ -74,13 +85,10 @@ abstract class ArrayRepo{
 
     public function delete($entity)
     {
-        if ($entity instanceof StubModel)
-        {
+        if ($entity instanceof StubModel) {
             $entity = $entity->id;
         }
 
         static::collection()->forget($entity);
     }
-
-
-}
+} 

@@ -5,14 +5,13 @@ use Cms\Section\SectionRepoInterface;
 class AdminSectionsController extends \BaseController {
 
     protected $rules = array(
-        'name'=>'required',
-        'slug_url'=>'required',
-        'type'  => 'required|in:page,blog',
-        'menu' => 'in:1,0',
-        'published' =>'in:1,0',
+        'name'     => 'required',
+        'slug_url' => 'required',
+        'type'     => 'required|in:page,blog',
+        'menu'     => 'in:1,0',
+        'published' => 'in:1,0',
         'menu_order' => 'integer'
     );
-
 
     protected $sectionRepo;
 
@@ -21,18 +20,17 @@ class AdminSectionsController extends \BaseController {
         $this->sectionRepo = $sectionRepo;
     }
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-        $sections = $this->sectionRepo->search(Input::all(),\Cms\Base\BaseRepo::PAGINATE);
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function index()
+    {
+        $sections = $this->sectionRepo->search(Input::all(), \Cms\Base\BaseRepo::PAGINATE);
 
-        return View::make('admin/sections/list',compact('sections'));
-	}
-
+        return View::make('admin/sections/list', compact('sections'));
+    }
 
 	/**
 	 * Show the form for creating a new resource.
@@ -44,7 +42,6 @@ class AdminSectionsController extends \BaseController {
         return View::make('admin/sections/create');
 	}
 
-
 	/**
 	 * Store a newly created resource in storage.
 	 *
@@ -54,17 +51,19 @@ class AdminSectionsController extends \BaseController {
 	{
         $data = Input::all();
 
-        $validator = Validator::make($data,$this->rules);
+        $validator = Validator::make($data, $this->rules);
 
-        if ($validator->passes()){
+        if ($validator->passes())
+        {
             $section = $this->sectionRepo->create($data);
             return Redirect::to('admin/sections/'. $section->id);
-        }else{
+        }
+        else
+        {
             return Redirect::back()->withInput()->withErrors($validator->messages());
         }
 
 	}
-
 
 	/**
 	 * Display the specified resource.
@@ -74,9 +73,8 @@ class AdminSectionsController extends \BaseController {
 	 */
 	public function show($id)
 	{
-        $section =$this->sectionRepo->findOrFail($id);
-
-        return View::make('admin/sections/show')->with('section',$section);
+        $section = $this->sectionRepo->findOrFail($id);
+        return View::make('admin/sections/show')->with('section', $section);
 	}
 
 
@@ -88,11 +86,9 @@ class AdminSectionsController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-        $section =$this->sectionRepo->findOrFail($id);
-
-        return View::make('admin/sections/edit')->with('section',$section);
+        $section = $this->sectionRepo->findOrFail($id);
+        return View::make('admin/sections/edit')->with('section', $section);
 	}
-
 
 	/**
 	 * Update the specified resource in storage.
@@ -102,17 +98,19 @@ class AdminSectionsController extends \BaseController {
 	 */
 	public function update($id)
 	{
-        $section =$this->sectionRepo->findOrFail($id);
+        $section = $this->sectionRepo->findOrFail($id);
 
         $data = Input::all();
 
-        $validator = Validator::make($data,$this->rules);
+        $validator = Validator::make($data, $this->rules);
 
-        if ($validator->passes()){
-            $section = $this->sectionRepo->update($section,$data);
-
+        if ($validator->passes())
+        {
+            $section = $this->sectionRepo->update($section, $data);
             return Redirect::route('admin.sections.show', $section->id);
-        }else{
+        }
+        else
+        {
             return Redirect::back()->withInput()->withErrors($validator->messages());
         }
 	}

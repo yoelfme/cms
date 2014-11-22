@@ -1,16 +1,10 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: yoel
- * Date: 17/11/14
- * Time: 0:55
- */
-namespace Cms\Section;
+<?php namespace Cms\Section;
 
 use Cms\Base\BaseEntity;
 
 interface SectionRepoInterface
 {
+
     public function findOrFail($id);
 
     public function search(array $data = array(), $paginate = false);

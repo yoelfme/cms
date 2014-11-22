@@ -10,10 +10,10 @@ class SectionRepo extends BaseRepo implements SectionRepoInterface
         return new Section;
     }
 
-    public $filters = ['search','published','menu'];
+    public $filters = ['search', 'published', 'menu'];
 
     public function filterBySearch($q, $value)
     {
-        $q->where('name','LIKE',"%$value%");   // Input::get('search');
+        $q->where('name', 'LIKE', "%$value%"); // Input::get('search')
     }
 }
