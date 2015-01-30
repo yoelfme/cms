@@ -59,6 +59,7 @@ abstract class ArrayRepo {
             }
         }
 
+
         return $paginate ?
             $collection->paginate(15, $data)
             : $collection;
