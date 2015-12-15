@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 $I = new FunctionalTester($scenario);
 $I->am('a CMS admin');
 $I->wantTo('filter and paginate the section list');
@@ -7,12 +8,12 @@ $I->wantTo('filter and paginate the section list');
 $sections = $I->haveSections(90);  // Random sections
 // And
 $I->amOnPage('admin/sections');
-$I->selectOption('published','1');
+$I->selectOption('published', '1');
 $I->click('Filter sections');
-$I->click('2','.pagination a');
+$I->click('2', '.pagination a');
 
 // Then
 $I->expectTo('see published sections');
-$I->see('Published','td');
+$I->see('Published', 'td');
 $I->expect('not to see draft sections');
-$I->dontSee('Draft','td');
+$I->dontSee('Draft', 'td');

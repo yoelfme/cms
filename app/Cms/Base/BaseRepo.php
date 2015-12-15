@@ -1,7 +1,9 @@
-<?php namespace Cms\Base;
+<?php
 
-abstract class BaseRepo {
+namespace Cms\Base;
 
+abstract class BaseRepo
+{
     const PAGINATE = true;
 
     public $filters = [];
@@ -13,24 +15,20 @@ abstract class BaseRepo {
         return $this->getModel()->findOrFail($id);
     }
 
-    public function search(array $data = array(), $paginate = false)
+    public function search(array $data = [], $paginate = false)
     {
         $data = array_only($data, $this->filters);
         $data = array_filter($data, 'strlen');
 
         $q = $this->getModel()->select();
 
-        foreach ($data as $field => $value)
-        {
+        foreach ($data as $field => $value) {
             // slug_url -> filterBySlugUrl
-            $filterMethod = 'filterBy' . studly_case($field);
+            $filterMethod = 'filterBy'.studly_case($field);
 
-            if (method_exists(get_called_class(), $filterMethod))
-            {
+            if (method_exists(get_called_class(), $filterMethod)) {
                 $this->$filterMethod($q, $value);
-            }
-            else
-            {
+            } else {
                 $q->where($field, $data[$field]);
             }
         }
@@ -49,17 +47,18 @@ abstract class BaseRepo {
     {
         $entity->fill($data);
         $entity->save();
+
         return $entity;
     }
 
     public function delete($entity)
     {
-        if (is_numeric($entity))
-        {
+        if (is_numeric($entity)) {
             $entity = $this->findOrFail($entity);
         }
 
         $entity->delete();
+
         return $entity;
     }
-} 
+}

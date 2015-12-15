@@ -11,7 +11,7 @@
 |
 */
 
-$app = new Illuminate\Foundation\Application;
+$app = new Illuminate\Foundation\Application();
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +24,7 @@ $app = new Illuminate\Foundation\Application;
 |
 */
 
-$env = $app->detectEnvironment(function(){
+$env = $app->detectEnvironment(function () {
     return 'local';
 });
 

@@ -3,10 +3,9 @@
 use Cms\Section\SectionRepoInterface;
 use Faker\Factory as Faker;
 use Illuminate\Database\Eloquent\Collection;
-use Cms\Section\Section;
 
-class SectionsSeeder extends Seeder {
-
+class SectionsSeeder extends Seeder
+{
     /**
      * @var SectionRepoInterface
      */
@@ -14,7 +13,6 @@ class SectionsSeeder extends Seeder {
 
     public function __construct(SectionRepoInterface $sectionRepo)
     {
-
         $this->sectionRepo = $sectionRepo;
     }
 
@@ -29,21 +27,19 @@ class SectionsSeeder extends Seeder {
 
         $sections = new Collection();
 
-        for ($i = 0; $i < $num; $i++)
-        {
+        for ($i = 0; $i < $num; $i++) {
             $name = $faker->unique()->sentence(2);
 
             $sections->add($this->sectionRepo->create([
-                'name' => $name,
-                'slug_url' => \Str::slug($name),
-                'type' => $faker->randomElement(['page', 'blog']),
+                'name'       => $name,
+                'slug_url'   => \Str::slug($name),
+                'type'       => $faker->randomElement(['page', 'blog']),
                 'menu_order' => rand(1, 10),
-                'menu' => rand(0, 1),
-                'published' => rand(0, 1)
+                'menu'       => rand(0, 1),
+                'published'  => rand(0, 1),
             ]));
         }
 
         return $sections;
     }
-
-} 
+}

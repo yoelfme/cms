@@ -1,18 +1,18 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class InitialTables extends Migration {
-
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		Schema::create('sections', function (Blueprint $table) {
+class InitialTables extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('sections', function (Blueprint $table) {
             $table->increments('id');
 
             //string -> varchar(255)
@@ -50,17 +50,16 @@ class InitialTables extends Migration {
             $table->timestamp('published_at');
             $table->softDeletes(); //deleted_at
         });
-	}
+    }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
         Schema::drop('pages');
         Schema::drop('sections');
-	}
-
+    }
 }

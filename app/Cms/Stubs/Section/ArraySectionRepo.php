@@ -1,10 +1,12 @@
-<?php namespace Cms\Stubs\Section;
+<?php
+
+namespace Cms\Stubs\Section;
 
 use Cms\Section\SectionRepoInterface;
 use Cms\Stubs\ArrayRepo;
 
-class ArraySectionRepo extends ArrayRepo implements SectionRepoInterface {
-
+class ArraySectionRepo extends ArrayRepo implements SectionRepoInterface
+{
     public $filters = ['search', 'published', 'menu'];
 
     public function getStubModel()
@@ -18,5 +20,4 @@ class ArraySectionRepo extends ArrayRepo implements SectionRepoInterface {
             return strpos($item->name, $value) !== false;
         });
     }
-
-} 
+}

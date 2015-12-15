@@ -1,8 +1,8 @@
-<?php 
+<?php
+
 $I = new FunctionalTester($scenario);
 $I->am('a CMS admin');
 $I->wantTo('filter the section list');
-
 
 $I->amGoingTo('check an empty section list');
 // When
