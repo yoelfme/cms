@@ -1,11 +1,12 @@
-<?php 
+<?php
+
 $I = new FunctionalTester($scenario);
 $I->am('a CMS admin');
 $I->wantTo('delete a section');
 
 // When
 $id = $I->haveSection();
-$I->amOnPage('/admin/sections/' . $id);
+$I->amOnPage('/admin/sections/'.$id);
 
 // Then
 $I->see('Delete section', 'button.btn-del');
@@ -15,6 +16,6 @@ $I->click('Delete section');
 
 // Then
 $I->seeCurrentUrlEquals('/admin/sections');
-$I->dontSeeRecord('sections',[
-    'id' => $id
+$I->dontSeeRecord('sections', [
+    'id' => $id,
 ]);

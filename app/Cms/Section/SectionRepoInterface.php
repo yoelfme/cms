@@ -1,13 +1,12 @@
-<?php namespace Cms\Section;
+<?php
 
-use Cms\Base\BaseEntity;
+namespace Cms\Section;
 
 interface SectionRepoInterface
 {
-
     public function findOrFail($id);
 
-    public function search(array $data = array(), $paginate = false);
+    public function search(array $data = [], $paginate = false);
 
     public function create(array $data);
 

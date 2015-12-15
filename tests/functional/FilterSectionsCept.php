@@ -1,21 +1,22 @@
-<?php 
+<?php
+
 $I = new FunctionalTester($scenario);
 $I->am('a CMS admin');
 $I->wantTo('filter the sections list');
 
 // When
 $I->haveSection(); // Created "Our company" section
-$sections =  $I->haveSections();
+$sections = $I->haveSections();
 
 // And
 $I->amOnPage('/admin/sections');
 
 // Then
-$I->seeElement('input',['name'=>'search']);
+$I->seeElement('input', ['name' => 'search']);
 
 // When
 $I->fillField('search', 'company');
-$I->selectOption('published','1');
+$I->selectOption('published', '1');
 // And
 $I->click('Filter sections');
 // Then
@@ -24,23 +25,23 @@ $I->expect('not to see the our company record');
 
 // Then
 $I->see('There are no sections, please create the first one');
-$I->dontSee('Our company','td.name');
-$I->seeInField('search','company');
+$I->dontSee('Our company', 'td.name');
+$I->seeInField('search', 'company');
 
 // When
-$I->selectOption('published','0');
-$I->selectOption('menu','0');
+$I->selectOption('published', '0');
+$I->selectOption('menu', '0');
 // And
 $I->click('Filter sections');
 // Then
 $I->see('There are no sections, please create the first one');
-$I->dontSee('Our company','td.name');
+$I->dontSee('Our company', 'td.name');
 
 // When
-$I->selectOption('menu','1');
+$I->selectOption('menu', '1');
 // And
 $I->click('Filter sections');
 // Then
-$I->see('Our company','td.name');
-$I->dontSee($sections->first()->name,'td.name');
-$I->dontSee($sections->last()->name,'td.name');
+$I->see('Our company', 'td.name');
+$I->dontSee($sections->first()->name, 'td.name');
+$I->dontSee($sections->last()->name, 'td.name');
