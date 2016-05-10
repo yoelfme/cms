@@ -4,8 +4,8 @@ namespace Cms\Stubs;
 
 class StubModel
 {
-    protected $data =  [];
-    protected $fillable =  [];
+    protected $data = [];
+    protected $fillable = [];
 
     public function __construct(array $data = [])
     {
@@ -22,8 +22,6 @@ class StubModel
         if (isset($this->$property)) {
             return $this->data[$property];
         }
-
-        return;
     }
 
     public function setData(array $data)
